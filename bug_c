@@ -61,3 +61,4 @@ affected executable:
   Like this: http://xx.xx.com/admin/edit_page.php?page=2 and 1=1
              http://xx.xx.com/admin/edit_page.php?page=2 and 1=2
              http://xx.xx.com/admin/edit_page.php?page=2 RLIKE SLEEP(2)
+Then, we can use tools like sqlmap for more information.
