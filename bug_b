@@ -1,0 +1,29 @@
+affected source code file: /admin/delete_image.php
+
+affected source code:
+<?php
+  include ("includes/headerRefresh.php");
+  include ("includes/config.php");
+  include ("functions/functions.php");
+  require_once ("includes/session.php");
+  check_login();
+  $file = $_GET['file'];
+  $folder = '../uploads/';
+  $file_path = $folder . $file;
+  if (is_file($file_path)) {
+      unlink($file_path);
+      redirect_to("manage_uploads.php?deleted=1");
+  }
+  ob_end_flush();
+?>
+
+affected function: unlink($file_path);
+
+affected executable: 
+First, we can create a test file "test.txt" in root directory.
+
+Then, visit the Vulnerable URL: http://xx.xx.com/admin/delete_image.php?file=../test.txt
+
+and the "test.txt" file in the root directory will be deleted.
+
+That is, we can control the "?file" parameter to delete any file through the relative path
