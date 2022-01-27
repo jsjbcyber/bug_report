@@ -38,7 +38,7 @@ affected source code:
 affected position: 
   
   $query = "UPDATE pages SET title = '{$title}', keywords = '{$keywords}', description = '{$description}', menu_name = '{$menu_name}', position = '{$position}', active = '{$active}', home_page = '{$home_page}', sidebar = '{$sidebar}', sidebar_align = '{$sidebar_align}', contact_form = '{$contact_form}' WHERE id = '{$id}'";    
-  The "page" and "post" parameters have not been safely processed. SQL injection can be achieved by constructing SQL injection statements.
+  "page" and "post" parameter has not been safely processed. SQL injection can be achieved by constructing SQL injection statements.
       
 affected executable: 
   Like this: http://xx.xx.com/admin/edit_page.php?page=2&post=2 and 1=1
