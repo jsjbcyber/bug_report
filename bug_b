@@ -26,4 +26,4 @@ Then, visit the Vulnerable URL: http://xx.xx.com/admin/delete_image.php?file=../
 
 and the "test.txt" file in the root directory will be deleted.
 
-That is, we can control the "?file" parameter to delete any file through the relative path
+That is, we can control the "delete_image.php?file=" parameter to delete any file through the relative path
