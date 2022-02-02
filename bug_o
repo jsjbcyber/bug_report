@@ -1,30 +1,22 @@
-affected source code file: /admin/news/sort_mod.php and /inc/function.php
+affected source code file: /admin/news/sort_add.php and /inc/function.php
 --------------------------------
 affected source code:
   /admin/news/sort_mod.php:
         <?php
           .....
           <tr>
-          <td width="13%" height="24" align="right" valign="middle" bgcolor="#f1f1f1">栏目名称：</td>
-          <td width="87%" height="24" align="left" valign="middle" bgcolor="#f1f1f1">
-          <?php
-            $temp_style = "";
-            if (!empty($list['style'])){$temp_style .= "color:".$list['style'].";";}
-            if (!empty($list['title_bold'])){$temp_style .= "font-weight:bold;";}
-            if (!empty($list['title_em'])){$temp_style .= "font-style: italic;";}
-            if (!empty($list['title_u'])){$temp_style .= "text-Decoration:underline;";}
-            ?>
-              <div style="width:215px;float:left;">
-                  <input type="hidden" value="<?php echo $list['style']?>" name="title_color" id="title_color" />
-                  <input type="hidden" value="<?php echo $list['title_bold']?>" name="title_bold" id="title_bold" />
-                  <input type="hidden" value="<?php echo $list['title_em']?>" name="title_em" id="title_em" />
-                  <input type="hidden" value="<?php echo $list['title_u']?>" name="title_u" id="title_u" />
-                  <input name="name" type="text" id="name" size="30" style="<?php echo $temp_style; ?>" value="<?php echo $list['name']; ?>" />
-                </div>
-                <div class="color">
-                  <?php include '../../inc/choose_color.php'; ?>
-                </div></td>
-          </tr>
+            <td width="13%" height="24" align="right" valign="middle" bgcolor="#f1f1f1">栏目名称：</td>
+            <td width="87%" height="24" align="left" valign="middle" bgcolor="#f1f1f1"><div style="width:335px;float:left;">
+                <input type="hidden" value="" name="title_color" id="title_color" />
+                <input type="hidden" value="" name="title_bold" id="title_bold" />
+                <input type="hidden" value="" name="title_em" id="title_em" />
+                <input type="hidden" value="" name="title_u" id="title_u" />
+                <input name="name" type="text" id="name" size="50" value="" />
+              </div>
+              <div class="color">
+                <?php include '../../inc/choose_color.php'; ?>
+              </div></td>
+         </tr>
           .....
         ?>
  /inc/function.php:
