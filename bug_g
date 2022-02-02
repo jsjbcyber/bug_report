@@ -16,5 +16,5 @@ affected reason:
 --------------------------------
 affected executable: 
   
-  visit url:http://xx.xx.com/cms/5/admin/login.php
+  visit url:http://xx.xx.com/admin/login.php
   use: admin' or '1'='1 as the username;  Then we can log in to the background with any password.
