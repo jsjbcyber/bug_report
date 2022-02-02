@@ -1,4 +1,4 @@
-affected source code file: /admin/manager/admin_mod.php
+affected source code file: /admin/login.php
 --------------------------------
 affected source code:
 .....
@@ -12,7 +12,7 @@ affected source code:
 --------------------------------
 affected reason:
 
-      We can see the $id parameter has not been safely processed. So, the SQL injection can be achieved by constructing SQL injection statements in /admin/manager/admin_mod.php
+      We can see the $id parameter has not been safely processed. So, the SQL injection can be achieved by constructing SQL injection statements in /admin/login.php
 --------------------------------
 affected executable: 
   
