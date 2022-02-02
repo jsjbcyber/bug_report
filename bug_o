@@ -1,0 +1,76 @@
+affected source code file: /admin/news/sort_mod.php and /inc/function.php
+--------------------------------
+affected source code:
+  /admin/news/sort_mod.php:
+        <?php
+          .....
+          <tr>
+          <td width="13%" height="24" align="right" valign="middle" bgcolor="#f1f1f1">栏目名称：</td>
+          <td width="87%" height="24" align="left" valign="middle" bgcolor="#f1f1f1">
+          <?php
+            $temp_style = "";
+            if (!empty($list['style'])){$temp_style .= "color:".$list['style'].";";}
+            if (!empty($list['title_bold'])){$temp_style .= "font-weight:bold;";}
+            if (!empty($list['title_em'])){$temp_style .= "font-style: italic;";}
+            if (!empty($list['title_u'])){$temp_style .= "text-Decoration:underline;";}
+            ?>
+              <div style="width:215px;float:left;">
+                  <input type="hidden" value="<?php echo $list['style']?>" name="title_color" id="title_color" />
+                  <input type="hidden" value="<?php echo $list['title_bold']?>" name="title_bold" id="title_bold" />
+                  <input type="hidden" value="<?php echo $list['title_em']?>" name="title_em" id="title_em" />
+                  <input type="hidden" value="<?php echo $list['title_u']?>" name="title_u" id="title_u" />
+                  <input name="name" type="text" id="name" size="30" style="<?php echo $temp_style; ?>" value="<?php echo $list['name']; ?>" />
+                </div>
+                <div class="color">
+                  <?php include '../../inc/choose_color.php'; ?>
+                </div></td>
+          </tr>
+          .....
+        ?>
+ /inc/function.php:
+ <?php
+ ......
+     function getCategoryList($id = 0, $level = 0) {
+      global $db;
+      $category_arr = $db->getList (get_sql( "SELECT * FROM {pre}class WHERE fid = " . $id . " order by rank,id" ));
+      for($lev = 0; $lev < $level * 2 - 1; $lev ++) {
+        $level_nbsp .= "&nbsp;&nbsp;";
+      }
+      $level++;
+      $level_nbsp .= "┝";
+      foreach ( $category_arr as $category ) {
+        $id = $category ['id'];
+        $fid = $category ['fid'];
+        $name = $category ['name'];
+        $son = $category ['son'];
+        $sons = $category ['sons'];
+        $count = $category['count'];
+        $depth = $category['depth'];
+        $rank = $category['rank'];
+        echo "
+    <tr onMouseOver=\"this.style.background='#f5f5f5'\" onMouseOut=\"this.style.background='#ffffff';\"  bgcolor=\"#ffffff\">
+      <td height=\"26\" align=\"center\">" . $id . "&nbsp;</td>
+      <td height=\"26\" >" . $level_nbsp . " <a href='sort_mod.php?act=mod&id=" . $id . "&fid=" . $fid . "'> " . getstyle('class',$id,$name) . "</a>&nbsp;&nbsp;(fid: $fid)</td>
+      <td height=\"26\" align=\"center\">" . $son . "&nbsp;</td>
+      <td height=\"26\" align=\"center\">" . $count . "&nbsp;</td>
+      <td height=\"26\" align=\"center\">" . $depth . "&nbsp;</td>
+      <td height=\"26\" align=\"center\" style=\"color:#FF0000\">" . $fid . "&nbsp;</td>
+      <td height=\"26\" align=\"center\">" . $rank . "&nbsp;</td>
+      <td height=\"26\" align=\"center\">
+        <a href='sort_add.php?act=add&fid=" . $id . "'>添加子栏目</a> | 
+        <a href='news_add.php?act=add&cid=" . $id . "'>添加文章</a> | 
+        <a href='sort_mod.php?act=mod&id=" . $id . "&fid=" . $fid . "'>修改</a> | 
+        <a href='sort_ok.php?id=" . $id . "&act=del' onClick=\"javascript:return confirm('确实要删除吗?')\">删除</a></td>
+    </tr> ";
+        getCategoryList ( $id, $level );
+      }
+    }
+    ......
+  ?>
+--------------------------------
+affected executable: 
+  After Signing in to the background in advance. Then we can visit the following URL: 
+  http://xx.xx.com/admin/news/sort_mod.php?act=mod&id=2&fid=0
+             
+  And we edit the "栏目名称" with "<script>alert(/xss/)</script>"
+  Then we can see a pop-up window with an XSS prompt. 
