@@ -1,4 +1,4 @@
-Use php5 for confirming bugs.
+Use php5 for verifying bugs.
 ------------FIRST ONE-------------------------------------------------------------------
 affected source code file: /admin/login.php
 --------------------------------
